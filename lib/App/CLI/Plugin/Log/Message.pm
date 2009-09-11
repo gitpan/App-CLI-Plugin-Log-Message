@@ -8,7 +8,7 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
 
 =head1 VERSION
 
-0.1
+0.2
 
 =head1 SYNOPSIS
 
@@ -28,11 +28,11 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
   # MyApp/Hello.pm
   package MyApp::Hello;
   use strict;
-  feature "5.10.0";
+  use feature ":5.10.0";
   use base qw(App::CLI::Command);
   
   sub run {
-
+  
       my($self, @args) = @_;
       $self->log->store("myapp execute start");
       $self->log->store("myapp execute end");
@@ -69,7 +69,7 @@ use 5.008;
 use Log::Message;
 
 our $PACKAGE = __PACKAGE__;
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 =pod
 
