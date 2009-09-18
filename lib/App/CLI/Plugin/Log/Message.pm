@@ -8,7 +8,7 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
 
 =head1 VERSION
 
-0.2
+0.3
 
 =head1 SYNOPSIS
 
@@ -66,10 +66,11 @@ log method setting
 
 use strict;
 use 5.008;
+use base qw(Class::Data::Accessor);
 use Log::Message;
 
-our $PACKAGE = __PACKAGE__;
-our $VERSION = '0.2';
+__PACKAGE__->mk_classaccessor("log");
+our $VERSION = '0.3';
 
 =pod
 
@@ -86,24 +87,50 @@ Example:
 
       my($self, @args) = @_;
       $self->log->store("myapp execute start");
+      $self->log->store(level => "warn", message => "warning message");
+      $self->log->store(level => "cluck", message => "cluck message");
       $self->log->store("myapp execute end");
       say $self->log->stringfy_stack;
       # for option(same Log::Message#retrieve option)
-      #say $self->log->stringfy_stack(level => "log", tag => qr/myapp/);
+      #say $self->log->stringfy_stack(level => "log");
   }
-
+  
   # execute
-  [kurt@localhost ~] ./myapp hello
-  Sun Sep  6 20:57:10 2009 ID:00000000 myapp[2027]: myapp execute start(at /usr/local/lib/perl5/5.10.0/Log/Message.pm line 410
-          Log::Message::store('Log::Message=HASH(0x96855f0)', 'myapp execute start') called at /home/kurt/lib/MyApp/Log.pm line 13
-          MyApp::Log::run('MyApp::Log=HASH(0x9607790)') called at /usr/local/lib/perl5/site_perl/5.10.0/App/CLI/Command.pm line 53
-          App::CLI::Command::run_command('MyApp::Log=HASH(0x9607790)') called at /usr/local/lib/perl5/site_perl/5.10.0/App/CLI.pm line 79
-          App::CLI::dispatch('MyApp') called at ./myapp.pl line 8)
-  Sun Sep  6 20:57:10 2009 ID:00000001 myapp[2027]: myapp execute end(at /usr/local/lib/perl5/5.10.0/Log/Message.pm line 410
-          Log::Message::store('Log::Message=HASH(0x96855f0)', 'myapp execute end') called at /home/kurt/lib/MyApp/Log.pm line 14
-          MyApp::Log::run('MyApp::Log=HASH(0x9607790)') called at /usr/local/lib/perl5/site_perl/5.10.0/App/CLI/Command.pm line 53
-          App::CLI::Command::run_command('MyApp::Log=HASH(0x9607790)') called at /usr/local/lib/perl5/site_perl/5.10.0/App/CLI.pm line 79
-          App::CLI::dispatch('MyApp') called at ./myapp.pl line 8)
+  [kurt@localhost ~] ./myapp hello 2>/dev/null
+  Sat Sep 19 00:20:02 2009 log      ID:00000000 NONE[3963]: myapp execute start
+  Sat Sep 19 00:20:02 2009 log      ID:00000003 NONE[3963]: myapp execute end
+ 
+  # stringfy_stack verbose option
+  sub options {
+      return (
+         "verbose|v"   => "verbose",
+      );
+  }
+  
+  sub run {
+
+      my($self, @args) = @_;
+      $self->log->store("myapp execute start");
+      $self->log->store(level => "warn", message => "warning message");
+      $self->log->store(level => "cluck", message => "cluck message");
+      $self->log->store("myapp execute end");
+      say $self->log->stringfy_stack;
+      # for option(same Log::Message#retrieve and verbose option)
+      #say $self->log->stringfy_stack(level => "log", verbose => $self->{verbose});
+  }
+  
+  # verbose execute
+  [kurt@localhost ~] ./myapp hello --verbose 2>/dev/null
+   Sat Sep 19 00:23:07 2009 log      ID:00000000 NONE[3968]: at /usr/local/lib/perl5/5.10.0/Log/Message.pm line 410
+           Log::Message::store('Log::Message=HASH(0x9b468f0)', 'myapp execute start') called at /home/holly/lib/MyApp/Log.pm line 19
+           MyApp::Log::run('MyApp::Log=HASH(0x9bb2498)') called at /home/kurt/App/CLI/Plugin/InstallCallback.pm line 183
+           App::CLI::Plugin::InstallCallback::_run_command('MyApp::Log=HASH(0x9bb2498)') called at /usr/local/lib/perl5/site_perl/5.10.0/App/CLI.pm line 79
+           App::CLI::dispatch('MyApp') called at ./myapp.pl line 8
+   Sat Sep 19 00:23:07 2009 log      ID:00000003 NONE[3968]: at /usr/local/lib/perl5/5.10.0/Log/Message.pm line 410
+           Log::Message::store('Log::Message=HASH(0x9b468f0)', 'myapp execute end') called at /home/holly/lib/MyApp/Log.pm line 22
+           MyApp::Log::run('MyApp::Log=HASH(0x9bb2498)') called at /home/kurt/App/CLI/Plugin/InstallCallback.pm line 183
+           App::CLI::Plugin::InstallCallback::_run_command('MyApp::Log=HASH(0x9bb2498)') called at /usr/local/lib/perl5/site_perl/5.10.0/App/CLI.pm line 79
+           App::CLI::dispatch('MyApp') called at ./myapp.pl line 8
 
 =cut
 *Log::Message::stringfy_stack   = \&_stringfy_stack;
@@ -134,30 +161,31 @@ Example:
 return Log::Message object
 
 =cut
-sub log {
+
+sub setup {
 
     my $self = shift;
-
-    if (!exists $self->{$PACKAGE}) {
-        my %log_option = (exists $self->config->{log_message}) ? %{$self->config->{log_message}} : ();
-        $self->{$PACKAGE} = Log::Message->new(%log_option);
-    }
-    return $self->{$PACKAGE};
+    my %log_option = (exists $self->config->{log_message}) ? %{$self->config->{log_message}} : ();
+    $self->log(Log::Message->new(%log_option));
+    return $self->NEXT::setup;
 }
 
-{
-    sub _stderr {
-        print STDERR shift->message . "\n";
-    }
 
-    sub _stringfy_stack {
-        my $self  = shift;
-        my @list  = $self->retrieve(@_);
-        my @lines = map {
-                        sprintf "%s ID:%08i %s[%i]: %s(%s)", $_->when, $_->id, $_->tag, $$, $_->message, $_->longmess;
-                    } @list;
-        return join "\n", @lines;
-    }
+####################################
+# Log::Message extended method
+####################################
+sub _stderr {
+    print STDERR shift->message . "\n";
+}
+
+sub _stringfy_stack {
+
+    my($self, %option) = @_;
+    my @lines = map {
+                    my $message = (exists $option{verbose} && $option{verbose} == 1) ? $_->longmess : $_->message;
+                    sprintf("%s %-8s ID:%08i %s[%i]: %s", $_->when, $_->level, $_->id, $_->tag, $$, $message)
+                } $self->retrieve(%option);
+    return join "\n", @lines;
 }
 
 1;
@@ -166,7 +194,7 @@ __END__
 
 =head1 SEE ALSO
 
-L<App::CLI::Extension> L<Log::Message>
+L<App::CLI::Extension> L<Class::Data::Accessor> L<Log::Message>
 
 =head1 AUTHOR
 

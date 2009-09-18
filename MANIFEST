@@ -29,17 +29,8 @@ t/03_logmessage.t
 t/04_stringfy_stack.t
 t/lib/MyApp.pm
 t/lib/MyApp/Can.pm
-t/lib/MyApp/DefaultCallback.pm
 t/lib/MyApp/LogMessage.pm
 t/lib/MyApp/LogObjCan.pm
-t/lib/MyApp/NewCallback.pm
-t/lib/MyApp/Plugin/Finish1.pm
-t/lib/MyApp/Plugin/Finish2.pm
-t/lib/MyApp/Plugin/Postrun1.pm
-t/lib/MyApp/Plugin/Postrun2.pm
-t/lib/MyApp/Plugin/Prerun1.pm
-t/lib/MyApp/Plugin/Prerun2.pm
-t/lib/MyApp/SameInstallCallback.pm
 t/lib/MyApp/StringfyStack.pm
 xt/perlcritic.t
 xt/pod.t
