@@ -8,7 +8,7 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
 
 =head1 VERSION
 
-0.3
+0.4
 
 =head1 SYNOPSIS
 
@@ -70,7 +70,7 @@ use base qw(Class::Data::Accessor);
 use Log::Message;
 
 __PACKAGE__->mk_classaccessor("log");
-our $VERSION = '0.3';
+our $VERSION = '0.4';
 
 =pod
 
@@ -114,9 +114,7 @@ Example:
       $self->log->store(level => "warn", message => "warning message");
       $self->log->store(level => "cluck", message => "cluck message");
       $self->log->store("myapp execute end");
-      say $self->log->stringfy_stack;
-      # for option(same Log::Message#retrieve and verbose option)
-      #say $self->log->stringfy_stack(level => "log", verbose => $self->{verbose});
+      say $self->log->stringfy_stack(level => "log", verbose => $self->{verbose});
   }
   
   # verbose execute

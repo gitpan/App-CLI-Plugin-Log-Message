@@ -1,5 +1,7 @@
 Revision history for Perl extension App::CLI::Plugin::Log::Message
 
+0.4   Tue Sep 22 16:20:00 2009
+        - fixed invalid pod
 0.3   Fri Sep 18 23:59:59 2009
         - fixed Log::Message#stringfy_stack. format change
 0.2   Sat Sep 12 01:22:35 2009
