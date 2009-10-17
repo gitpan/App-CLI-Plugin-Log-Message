@@ -8,7 +8,7 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
 
 =head1 VERSION
 
-0.4
+0.5
 
 =head1 SYNOPSIS
 
@@ -70,7 +70,7 @@ use base qw(Class::Data::Accessor);
 use Log::Message;
 
 __PACKAGE__->mk_classaccessor("log");
-our $VERSION = '0.4';
+our $VERSION = '0.5';
 
 =pod
 

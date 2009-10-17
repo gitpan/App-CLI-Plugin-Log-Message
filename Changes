@@ -1,5 +1,6 @@
 Revision history for Perl extension App::CLI::Plugin::Log::Message
-
+0.5   Sun Oct 18 01:38:17 2009
+        - fixed invalid Makefile.PL and META.yml
 0.4   Tue Sep 22 16:20:00 2009
         - fixed invalid pod
 0.3   Fri Sep 18 23:59:59 2009
@@ -8,3 +9,4 @@ Revision history for Perl extension App::CLI::Plugin::Log::Message
         - fixed invalid pod
 0.1   Fri Sep 11 01:22:35 2009
         - original version
+

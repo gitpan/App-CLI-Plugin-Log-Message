@@ -1,7 +1,7 @@
 ---
-abstract: ~
+abstract: 'for App::CLI::Extension logging module'
 author:
-  - 'Akira Horimoto <kurt0027@gmail.com>'
+  - 'Akira Horimoto'
 build_requires:
   ExtUtils::MakeMaker: 6.42
   Test::More: 0
@@ -20,8 +20,11 @@ no_index:
     - t
     - xt
 requires:
-  Filter::Util::Call: 0
-  perl: 5.8.1
+  App::CLI::Extension: 0
+  Class::Data::Accessor: 0
+  Log::Message: 0
+  NEXT: 0
+  perl: 5.8.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.5
