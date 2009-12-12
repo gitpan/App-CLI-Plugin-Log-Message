@@ -8,7 +8,7 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
 
 =head1 VERSION
 
-0.5
+1.0
 
 =head1 SYNOPSIS
 
@@ -70,7 +70,7 @@ use base qw(Class::Data::Accessor);
 use Log::Message;
 
 __PACKAGE__->mk_classaccessor("log");
-our $VERSION = '0.5';
+our $VERSION = '1.0';
 
 =pod
 
@@ -141,7 +141,7 @@ Example:
 
   # MyApp::Hello(App::CLI::Command base package)
   sub run {
-
+  
       my($self, @args) = @_;
       $self->log->store(level => "stderr", message => "myapp execute start");
       $self->log->store(level => "stderr", message => "myapp execute end");
@@ -162,10 +162,10 @@ return Log::Message object
 
 sub setup {
 
-    my $self = shift;
-    my %log_option = (exists $self->config->{log_message}) ? %{$self->config->{log_message}} : ();
-    $self->log(Log::Message->new(%log_option));
-    return $self->NEXT::setup;
+	my($self, @argv) = @_;
+	my %log_option = (exists $self->config->{log_message}) ? %{$self->config->{log_message}} : ();
+	$self->log(Log::Message->new(%log_option));
+	$self->maybe::next::method(@argv);
 }
 
 
@@ -173,17 +173,17 @@ sub setup {
 # Log::Message extended method
 ####################################
 sub _stderr {
-    print STDERR shift->message . "\n";
+	warn shift->message . "\n";
 }
 
 sub _stringfy_stack {
 
-    my($self, %option) = @_;
-    my @lines = map {
-                    my $message = (exists $option{verbose} && $option{verbose} == 1) ? $_->longmess : $_->message;
-                    sprintf("%s %-8s ID:%08i %s[%i]: %s", $_->when, $_->level, $_->id, $_->tag, $$, $message)
-                } $self->retrieve(%option);
-    return join "\n", @lines;
+	my($self, %option) = @_;
+	my @lines = map {
+			my $message = (exists $option{verbose} && $option{verbose} == 1) ? $_->longmess : $_->message;
+			sprintf("%s %-8s ID:%08i %s[%i]: %s", $_->when, $_->level, $_->id, $_->tag, $$, $message)
+	} $self->retrieve(%option);
+	return join "\n", @lines;
 }
 
 1;

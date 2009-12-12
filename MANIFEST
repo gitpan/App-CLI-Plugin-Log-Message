@@ -35,4 +35,3 @@ t/lib/MyApp/StringfyStack.pm
 xt/perlcritic.t
 xt/pod.t
 xt/podspell.t
-xt/synopsis.t

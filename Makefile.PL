@@ -5,9 +5,8 @@ all_from 'lib/App/CLI/Plugin/Log/Message.pm';
 
 build_requires 'Test::More';
 requires(
-      "App::CLI::Extension"   => 0,
+      "App::CLI::Extension"   => 1.0,
       "Class::Data::Accessor" => 0,
-      "NEXT"                  => 0,
       "Log::Message"          => 0,
     );
 use_test_base;
