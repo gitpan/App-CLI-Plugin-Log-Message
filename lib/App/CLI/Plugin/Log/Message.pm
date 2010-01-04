@@ -8,7 +8,7 @@ App::CLI::Plugin::Log::Message - for App::CLI::Extension logging module
 
 =head1 VERSION
 
-1.0
+1.2
 
 =head1 SYNOPSIS
 
@@ -65,12 +65,11 @@ log method setting
 =cut
 
 use strict;
-use 5.008;
 use base qw(Class::Data::Accessor);
 use Log::Message;
 
 __PACKAGE__->mk_classaccessor("log");
-our $VERSION = '1.0';
+our $VERSION = '1.2';
 
 =pod
 
@@ -203,7 +202,7 @@ Akira Horimoto
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
-Copyright (C) 2009 Akira Horimoto
+Copyright (C) 2010 Akira Horimoto
 
 =cut
 

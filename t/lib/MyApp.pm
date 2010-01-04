@@ -8,6 +8,7 @@ use constant alias => (
                  stringfystack => "StringfyStack",
              );
 
+$ENV{APPCLI_NON_EXIT} = 1;
 __PACKAGE__->config(log_message => {tag => "LOGTEST"});
 __PACKAGE__->load_plugins(qw(
                Log::Message

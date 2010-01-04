@@ -1,0 +1,59 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.55.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 861d94c2bb14e25c24d6c5d3326cf344d6771a44 .gitignore
+SHA1 a7f10b9a0a9bc5d018c69e74017347cf5f073e5f Changes
+SHA1 42f0a1b55cf49f98b7d962936038944dad446cec MANIFEST
+SHA1 e8469e333c2b67eb703da1c6109299a1a1068e37 Makefile.PL
+SHA1 b60d3db27b9ece0523c94a787ecad8934edfa122 README
+SHA1 fd5f3c4f0418efee3b9b16cf8c3902e8374909df inc/Module/Install.pm
+SHA1 d001b4b9a48395a8c4134b234a0e1789138427c5 inc/Module/Install/AuthorTests.pm
+SHA1 7cd7c349afdf3f012e475507b1017bdfa796bfbd inc/Module/Install/Base.pm
+SHA1 ba186541bbf6439111f01fc70769cf24d22869bf inc/Module/Install/Can.pm
+SHA1 aaa50eca0d7751db7a4d953fac9bc72c6294e238 inc/Module/Install/Fetch.pm
+SHA1 219da5a95c290312a81477b226f005997d97dcfd inc/Module/Install/Include.pm
+SHA1 3e83972921d54198d1246f7278f08664006cd65d inc/Module/Install/Makefile.pm
+SHA1 12bf1867955480d47d5171a9e9c6a96fabe0b58f inc/Module/Install/Metadata.pm
+SHA1 a399445a51f2f7e00c46487e5a7ddf712b1111ee inc/Module/Install/TestBase.pm
+SHA1 f7ee667e878bd2faf22ee9358a7b5a2cc8e91ba4 inc/Module/Install/Win32.pm
+SHA1 8ed29d6cf217e0977469575d788599cbfb53a5ca inc/Module/Install/WriteAll.pm
+SHA1 bb7c7069ab09d5c495420e33844006e7a1b5f9a9 inc/Spiffy.pm
+SHA1 741bf1da0b74065a926074535f9cdc86de675b74 inc/Test/Base.pm
+SHA1 474f62668f61598dde1173370fdd4476e437a508 inc/Test/Base/Filter.pm
+SHA1 f0ebc594cf8ba858ee9a840c344d9b7ea2c3c6f4 inc/Test/Builder.pm
+SHA1 6bb30e9867f6dbcada80acca07cb727fa09fc3a0 inc/Test/Builder/Module.pm
+SHA1 07c750f370de7a44ee7b0ed9ec30a7e89c24c9b9 inc/Test/More.pm
+SHA1 dc3c8185921365447ec0fe3caed8547b071a725d lib/App/CLI/Plugin/Log/Message.pm
+SHA1 8b8524bdd7985a6b50e72899b823dea4701e519b t/00_compile.t
+SHA1 b94868aff75e5ff8753fd0949e0209f241f7abb3 t/01_can.t
+SHA1 14bb6a2b02d6cbb7580abda2ce199b463381f5bd t/02_logobj_can.t
+SHA1 c3836c4f44b5836d0adc67e4c1e06b15d322cd2a t/03_logmessage.t
+SHA1 da7a89780ce49dbda4714a55f33de74694c737a6 t/04_stringfy_stack.t
+SHA1 60c6015bbbd2d876b7a61068728e69b96349d2a6 t/lib/MyApp.pm
+SHA1 064e3b8a0051125078e61ca8826e4fa5b2fa0e98 t/lib/MyApp/Can.pm
+SHA1 74354c70bb33152fd986e9c7fba279c05f3e6aeb t/lib/MyApp/LogMessage.pm
+SHA1 0c923811db201bdb09b2144f0d27971f60e34285 t/lib/MyApp/LogObjCan.pm
+SHA1 c92df371bbe30f3f385490bce4bd5838bdffe65f t/lib/MyApp/StringfyStack.pm
+SHA1 f1f07199c8835fdafdf9eb6c7226f7adb7fce2a1 xt/perlcritic.t
+SHA1 e9c6a5881fc60173fbc8d479c1afd2ce3b43bef1 xt/pod.t
+SHA1 8f6515473a0bcbd5e82a5f4b53d751652d1f8f1f xt/podspell.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (GNU/Linux)
+
+iD8DBQFLQfqvN6ezU7mtZfcRAssRAJ9VkRKJulwH0F/dPCi6e9UYNHA0GgCdF0hH
+Rfsp6s9LBcuoDUQVw3jxPXY=
+=8FIE
+-----END PGP SIGNATURE-----
